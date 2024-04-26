@@ -1,0 +1,54 @@
+name: Daily Programming
+on:
+  schedule:
+    - cron: 00 3 * * 1,2,3,4,5
+
+jobs:
+  create_issue:
+    name: Create Programming Issue
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+      checks: write
+      contents: write
+      deployments: write
+      issues: write
+      packages: write
+      pull-requests: write
+      repository-projects: write
+      security-events: write
+      statuses: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      
+      - name: Install Python dependencies
+        run: pip install requests
+
+      - name: Run script and create GitHub Issue
+        run: |
+          git config --global user.email "IDEdevelop16@gmail.com"
+          git config --global user.name "ide-jun"
+          today=$(TZ='Asia/Tokyo' date +%Y-%m-%d)
+          issue_body=$(python ./daily_atcoder_challenge.py)
+          gh issue create \
+            --title "Daily Atcoder Challenge ($today)" \
+            --assignee "$ASSIGNEES" \
+            --label "$LABELS" \
+            --body "$issue_body"
+          git switch -c feat/$today
+          mkdir daily-programming/$today
+          touch daily-programming/$today/.gitkeep
+          git add .
+          git commit -m "create $today directory"
+          git push -u origin feat/$today
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          ASSIGNEES: Ryot-Kawa
+          LABELS: daily programming
