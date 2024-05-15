@@ -1,23 +1,16 @@
-#include <stdio.h>
-
+#include <iostream>
+using namespace std;
 int main(){
   int n,k;
-  scanf("%d %d",&n,&k);
-  int str[n];
-  for(int i=0;i<n;i++){
-    scanf("%d",&str[i]);
-  }
-  int m=0;
-  for(int i=0;i<n;i++){
-    if(str[i]%k==0){
-      m++;
+  cin >> n >> k;
+  if(0<n,k && n,k<=100){
+    int a[n];
+    for(int i=0;i<n;i++){
+        cin >> a[n];
+        if((a[n]%k)==0){
+        cout << a[n]/k << " ";
+        }
     }
-  }
-  int ans[m];
-  for(int i=0;i<n;i++){
-    if(str[i]%k==0){
-      ans[i]=str[i]/k;
-      printf("%d ",ans[i]);
-    }
+    cout << endl;
   }
 }
