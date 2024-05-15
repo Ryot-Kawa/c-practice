@@ -1,11 +1,12 @@
-#include <stdio.h>
+#include <iostream>
+using namespace std;
 int main(){
-  int N,M;
-  scanf("%d %d",&N, &M);
-  if(N==M){
-    printf("Yes");
+  int n,m;
+  cin >> n >> m;
+  if(n==m){
+    cout << "Yes" << endl;
   }
   else{
-    printf("No");
+    cout << "No" << endl;
   }
 }
