@@ -10,8 +10,8 @@ def fetch_problems():
 
 def main():
     problems = fetch_problems()
-    # Difficulty Bの問題をフィルタリング
-    difficulty_a_problems = [problem for problem in problems if problem['id'].startswith('abc') and problem['problem_index'] == "B"]
+    # Difficulty Cの問題をフィルタリング
+    difficulty_a_problems = [problem for problem in problems if problem['id'].startswith('abc') and problem['problem_index'] == "C"]
     # ランダムに問題を選択
     selected_problem = random.choice(difficulty_a_problems)
 
